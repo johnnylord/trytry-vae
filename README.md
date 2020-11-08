@@ -37,13 +37,13 @@ $ python main.py --config config/mnist_cvae.yml
 
 - Generate new images with VAE (Interpolation)
 ![vae-gen.png](https://i.imgur.com/pUWEcpq.png)
+> Refer [notebook](notebook/mnist-vae.ipynb) for how to do the interpolation between digits
 
 - Generate new images with CVAE (Given the class information and z information)
 ![cvae-gen.png](https://i.imgur.com/yTVjlGJ.png)
+> Refer [notebook](notebook/mnist-cvae.ipynb) for how to generate nwe image based on class and z information
 
 ## Reference
 - https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73
 - https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/
 - https://wiseodd.github.io/techblog/2016/12/17/conditional-vae/
-
-## Mathematical Derivation
