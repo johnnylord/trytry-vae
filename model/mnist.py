@@ -57,6 +57,12 @@ class VAEMNIST(nn.Module):
         z = self._sampling(mu, log_var)
         return z
 
+    def generate(self, z):
+        x = self.upsample(z)
+        x = x.view(x.size(0), 64, 7, 7)
+        x = self.decoder(x)
+        return x[:, :, 1:29, 1:29]
+
     def _sampling(self, mu, log_var):
         std = torch.exp(0.5*log_var)
         eps = torch.randn_like(std)
@@ -121,6 +127,14 @@ class CVAEMNIST(nn.Module):
         log_var = self.log_var(x)
         z = self._sampling(mu, log_var)
         return z
+
+    def generate(self, z, label):
+        one_hots = one_hot(label, CVAEMNIST.N_CLASSES).float()
+        x = torch.cat([z, one_hots], axis=1)
+        x = self.upsample(x)
+        x = x.view(x.size(0), 64, 7, 7)
+        x = self.decoder(x)
+        return x[:, :, 1:29, 1:29]
 
     def _sampling(self, mu, log_var):
         std = torch.exp(0.5*log_var)
